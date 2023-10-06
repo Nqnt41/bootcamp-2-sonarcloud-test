@@ -15,7 +15,8 @@ try {
     //Testing the connection via sequelize.
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
-} catch (error) {
+}
+catch (error) {
     console.error('Unable to connect to the database:', error);
 }
 
@@ -23,9 +24,14 @@ try {
 async function retrieveAllListings() {
     //ADD CODE HERE
     console.log('Retrieving all listings');
-    const listings = await Listing.findAll();
-    console.log(listings.every(listing => listing instanceof Listing)); // true
-    console.log("All users:", JSON.stringify(listings, null, 2));
+    try {
+        const listings = await Listing.findAll();
+        console.log(listings.every(listing => listing instanceof Listing)); // true
+        console.log("All users:", JSON.stringify(listings, null, 2));
+    }
+    catch (error) {
+        console.error('Failed to retrieve all listings: ' + error);
+    }
 }
 
 // Creates a listing variable containing the Library West information.
@@ -33,13 +39,12 @@ async function findLibraryWest() {
     console.log('Finding Library West');
     const listing = await Listing.findOne({ where: { name: 'Library West' } });
     // If Library West is not found on the list, report that information.
-    if (listing === null) {
-        console.log('Not found!');
+    try {
+        console.log(listing.dataValues); // Output information
     }
     // If Library West is indeed found, return information on the library.
-    else {
-        console.log(listing instanceof Listing); // true
-        console.log(listing.dataValues); // 'My Title'
+    catch (error) {
+        console.error('Library West not found: ' + error);
     }
 }
 
@@ -49,27 +54,38 @@ async function removeCable() {
     try {
         await Listing.destroy({where: {code: "CABL"}});
     }
-    catch {
-        console.log("CABL not found!")
+    catch (error) {
+        console.error("CABL not found: " + error)
     }
 }
 
 // Creates an additional listing for the Data Science and IT Building. Output error message if it fails, as done above.
 async function addDSIT() {
     console.log('Adding the new DSIT BLDG that will be across from Reitz union. Bye Bye CSE, Hub, and French Fries.');
-    const [listing, created] = await Listing.findOrCreate({ where: { code: 'DSIT' },
-        defaults: {
-            code: "DSIT",
-            name: "Data Science and IT Building"
-        }
-    });
+    try {
+        const [listing, created] = await Listing.findOrCreate({
+            where: {code: 'DSIT'},
+            defaults: {
+                code: "DSIT",
+                name: "Data Science and IT Building"
+            }
+        });
+    }
+    catch (error) {
+        console.error('DSIT addition failed: ' + error);
+    }
 }
 
 
 //Updates Phelps Lab's address in the Listing. Output error message if it fails, as done above.
 async function updatePhelpsLab() {
     console.log('UpdatingPhelpsLab.');
-    await Listing.update({ address: "1953 Museum Rd, Gainesville, FL 32603, United States" }, { where: { name: "Phelps Laboratory" } });
+    try {
+        await Listing.update({address: "1953 Museum Rd, Gainesville, FL 32603, United States"}, {where: {name: "Phelps Laboratory"}})
+    }
+    catch (error) {
+        console.error('Phelps Lab update failed: ' + error)
+    }
 }
 
 //Calling all the functions to test them, uses await to ensure compiler does not get overwhelmed.

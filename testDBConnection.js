@@ -17,5 +17,5 @@ try {
     console.log('Connection has been established successfully.'); // You should see this in the terminal if you have successfully connected to the database.
 }
 catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error('Unable to connect to the database: ', error);
 }
