@@ -1,3 +1,4 @@
+# .env is only one active.
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
