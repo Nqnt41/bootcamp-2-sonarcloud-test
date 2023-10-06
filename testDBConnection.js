@@ -1,7 +1,7 @@
-// Import Sequalize and other libraires
+// Import Sequelize and other libraries
 import { Sequelize } from '@sequelize/core';
 
-// Imports dontenv module and allows us to access stored environment variables stored in .env file
+// Imports dotenv module and allows us to access stored environment variables stored in .env file
 import 'dotenv/config';
 
 // Connects to the database

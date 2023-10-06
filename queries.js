@@ -63,7 +63,7 @@ async function removeCable() {
 async function addDSIT() {
     console.log('Adding the new DSIT BLDG that will be across from Reitz union. Bye Bye CSE, Hub, and French Fries.');
     try {
-        const [listing, created] = await Listing.findOrCreate({
+        await Listing.findOrCreate({
             where: {code: 'DSIT'},
             defaults: {
                 code: "DSIT",

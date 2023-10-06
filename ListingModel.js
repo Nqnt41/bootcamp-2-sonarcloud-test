@@ -1,13 +1,13 @@
 // Syntax for importing ES Modules - https://www.geeksforgeeks.org/how-to-use-an-es6-import-in-node-js/
 import { Sequelize, DataTypes } from '@sequelize/core';
 
-// Imports dontenv module and allows us to access stored environment variables stored in .env file
+// Imports dotenv module and allows us to access stored environment variables stored in .env file
 import 'dotenv/config';
 
 // Connect with the database
 const sequelize = new Sequelize(process.env.API_URL);
 
-// Create Sequalize Model for Listing
+// Create Sequelize Model for Listing
 const Listing = sequelize.define('Listing', {
   // Model attributes are defined here, one by one. Coordinates put separately via latitude and longitude.
   // Code, e.g. "AAF"

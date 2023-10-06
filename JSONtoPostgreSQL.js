@@ -1,4 +1,4 @@
-// Imports dontenv module and allows us to access stored environment variables stored in .env file - See https://www.npmjs.com/package/dotenv
+// Imports dotenv module and allows us to access stored environment variables stored in .env file - See https://www.npmjs.com/package/dotenv
 import 'dotenv/config';
 
 // Import file system - Examples of how to use the file system module - fs - https://www.scaler.com/topics/nodejs/fs-module-in-node-js/
