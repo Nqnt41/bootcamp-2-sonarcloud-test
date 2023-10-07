@@ -20,9 +20,11 @@ try {
     // Saves data in Listing variable and displays it on ElephantSQL.
     fs.readFile('listings.json', 'utf8', function(err, data) {
         // Throws an error if the data is not available.
-        if (err) throw err
-        {
+        try {
             console.log(data);
+        }
+        catch (error) {
+            console.error('Data not available: ', error);
         }
 
         // Save and parse the data from the listings.json file into a variable, so that we can iterate through each instance - Similar to Bootcamp#1
