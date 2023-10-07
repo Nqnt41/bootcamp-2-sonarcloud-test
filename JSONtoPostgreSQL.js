@@ -28,7 +28,7 @@ try {
         // Save and parse the data from the listings.json file into a variable, so that we can iterate through each instance - Similar to Bootcamp#1
         // First parses the data from the JSON file and stores it in listingData variable.
         // Afterward, turns listingData into an array used to convert data over to ElephantSQL.
-        const listingData=JSON.parse(data)
+        const listingData = JSON.parse(data)
         const listingArray = listingData.entries;
 
         // Use Sequelize create a new row in our database for each entry in our listings.json file using the Listing model we created in ListingModel.js
@@ -36,14 +36,14 @@ try {
         // Uses a for loop to iterate throughout the listingArray's elements one by one, adding them to the database individually.
         // Checks if each element has a latitude and longitude via a try and catch statement. If there is none, the array is printed without the optional details.
         // If there is a latitude and longitude, coordinates are put on the output.
-        for (let i = 0; i < listingArray.length; i++) {
+        for (let value of listingArray) {
             try {
-                listingArray[i].latitude = listingArray[i].coordinates.latitude
-                listingArray[i].longitude = listingArray[i].coordinates.longitude
-                Listing.create(listingArray[i])
+                value.latitude = value.coordinates.latitude
+                value.longitude = value.coordinates.longitude
+                Listing.create(value)
             }
-            catch {
-                Listing.create(listingArray[i])
+            catch (error) {
+                Listing.create(value)
             }
         }
     });
